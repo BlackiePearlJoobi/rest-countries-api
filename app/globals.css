@@ -1,1 +1,111 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf")
+    format("truetype");
+  font-weight: 300 600 800;
+}
+
+:root {
+  --font-primary: "Nunito Sans", sans-serif;
+
+  --blue-950: hsl(207, 26%, 17%);
+  --blue-900: hsl(209, 23%, 22%);
+  --gray-950: hsl(200, 15%, 8%);
+  --gray-400: hsl(0, 0%, 50%);
+  --gray-350: hsl(0, 0%, 59%);
+  --gray-300: hsl(0, 0%, 70%);
+  --gray-250: hsl(0, 0%, 77%);
+  --gray-50: hsl(0, 0%, 99%);
+
+  --black: #000000;
+  --white: #ffffff;
+}
+
+/* Custom Utility Classes */
+
+@utility text-preset-1 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 137.5%;
+}
+
+@utility text-preset-2 {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 137.5%;
+}
+
+@utility text-preset-3 {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 145%;
+}
+
+@utility text-preset-4-semibold {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 200%;
+}
+
+@utility text-preset-4-light {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 200%;
+}
+
+@utility text-preset-5-semibold {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+@utility text-preset-5-regular {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 145%;
+}
+
+@utility text-preset-5-light {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 225%;
+}
+
+@utility text-preset-6-semibold {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 135%;
+}
+
+@utility text-preset-6-regular {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 135%;
+}
+
+@utility text-preset-6-light {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 135%;
+}
+
+@utility box-light {
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: var(--shadow-md);
+}
+
+* {
+  /* outline: 1px solid rgb(200, 200, 200); */
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  letter-spacing: 0;
+  max-width: 100%;
+  min-height: 100svh;
+  place-items: center;
+}

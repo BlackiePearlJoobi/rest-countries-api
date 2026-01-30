@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased text-(--gray-950)">
         <div className="w-full flex flex-col">
           <Header></Header>
           {children}

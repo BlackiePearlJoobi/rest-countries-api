@@ -1,31 +1,13 @@
-"use client";
-
-import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Switch from "./Switch";
 
 const Header = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <header className="flex justify-between">
-      <h1>
+    <header className="sticky top-0 h-20 px-4 py-7.5 bg-(--white) shadow-md flex justify-between items-center sm:px-10.25">
+      <h1 className="font-extrabold leading-5 lg:text-preset-2">
         <Link href="/">Where in the world?</Link>
       </h1>
-      <button
-        type="button"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="flex gap-2 cursor-pointer"
-      >
-        <Image
-          src={`/assets/images/dark-mode${isHovered ? "-hover.svg" : ".svg"}`}
-          width={12}
-          height={12}
-          alt="dark mode switch"
-        ></Image>
-        <p>Dark Mode</p>
-      </button>
+      <Switch></Switch>
     </header>
   );
 };
