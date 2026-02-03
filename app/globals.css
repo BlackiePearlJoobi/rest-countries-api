@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: "Nunito Sans";
   src: url("fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf")
@@ -108,4 +110,18 @@ body {
   max-width: 100%;
   min-height: 100svh;
   place-items: center;
+}
+
+/* BackButton */
+.arrow-icon {
+  width: 17px;
+  height: 17px;
+  background-image: url("/assets/images/arrow-light.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+html.dark .arrow-icon {
+  background-image: url("/assets/images/arrow-dark.svg");
 }

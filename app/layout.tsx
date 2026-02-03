@@ -18,8 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased text-(--gray-950)">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: ` if (localStorage.theme === 'dark') { document.documentElement.classList.add('dark'); } `,
+          }}
+        />
+      </head>
+      <body className="antialiased bg-(--gray-50) dark:bg-(--blue-950) text-(--gray-950) dark:text-(--white)">
         <div className="w-full flex flex-col">
           <Header></Header>
           {children}

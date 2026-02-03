@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import data from "../../data.json";
@@ -102,11 +101,13 @@ const CountryPage = async ({
             </span>
             <ul className="mt-4 flex flex-wrap gap-4 sm:mt-0">
               {country.borders?.map((neighbor) => (
-                <li
-                  key={neighbor}
-                  className="min-w-24 h-7 box-light rounded-xs text-preset-6-light flex items-center justify-center sm:text-preset-5-light"
-                >
-                  <Link href={`/country/${neighbor}`}>{neighbor}</Link>
+                <li key={neighbor}>
+                  <Link
+                    href={`/country/${neighbor}`}
+                    className="min-w-24 h-7 box-light dark:bg-(--blue-900) rounded-xs text-preset-6-light flex items-center justify-center sm:text-preset-5-light"
+                  >
+                    {neighbor}
+                  </Link>
                 </li>
               ))}
             </ul>

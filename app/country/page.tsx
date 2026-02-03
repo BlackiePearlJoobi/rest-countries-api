@@ -37,7 +37,10 @@ const CountrySearchPage = async ({
           </p>
           <ul className="flex flex-col items-center gap-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-18">
             {partialMatches.map((country) => (
-              <li key={country.alpha3Code} className="w-66 h-84 box-light">
+              <li
+                key={country.alpha3Code}
+                className="w-66 h-84 box-light dark:bg-(--blue-900)"
+              >
                 <Link
                   href={`/country/${country.alpha3Code}`}
                   className="w-full"
