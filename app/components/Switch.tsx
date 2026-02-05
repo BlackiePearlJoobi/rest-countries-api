@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const Switch = () => {
-  const isDarkInitial = document.documentElement.classList.contains("dark");
+  const [isDark, setIsDark] = useState(false); // temporary initial value
 
-  const [isDark, setIsDark] = useState(isDarkInitial); // used only for this Switch component
+  // Sync with <html> after hydration
+  useEffect(() => {
+    const htmlIsDark = document.documentElement.classList.contains("dark");
+    setIsDark(htmlIsDark);
+  }, []);
 
   const toggleDarkMode = () => {
     const html = document.documentElement;

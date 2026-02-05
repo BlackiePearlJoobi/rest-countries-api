@@ -4,7 +4,8 @@ import Header from "./components/Header";
 
 export const metadata: Metadata = {
   title: "REST Countries API",
-  description: "",
+  description:
+    "Browse and search countries worldwide. View population, region, capital, borders, and more with a responsive dark mode interface.",
 };
 
 export const viewport: Viewport = {
