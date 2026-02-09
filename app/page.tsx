@@ -1,23 +1,31 @@
 import Image from "next/image";
 import { Country } from "./types/definitions";
 import CountriesList from "./components/CountriesList";
+import Pagination from "./components/Pagination";
 
 const Home = async ({
   searchParams,
 }: {
-  searchParams: { region?: string };
+  searchParams: { q?: string; region?: string; page?: string };
 }) => {
-  const region = (await searchParams).region || "";
-
   const response = await fetch(
     "https://restcountries.com/v3.1/all?fields=cca3,flags,name,population,region,capital",
   );
   const countries: Country[] = await response.json();
 
+  // Filter
+  const region = (await searchParams).region || "";
   const filtered = countries.filter((country: Country) => {
     if (!region) return true;
     return country.region === region;
   });
+
+  // Pagination
+  const page = Number((await searchParams).page) || 1;
+  const itemsPerPage = 8;
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const paginated = filtered.slice(start, end);
 
   return (
     <main className="px-4 pt-6 pb-16.25 sm:px-10 sm:pt-12 sm:pb-14.5 lg:pb-12">
@@ -41,6 +49,15 @@ const Home = async ({
             className="peer w-full ml-6"
             defaultValue=""
           ></input>
+
+          {/* Preserve region */}
+          {searchParams.region && (
+            <input type="hidden" name="region" value={searchParams.region} />
+          )}
+
+          {/* Reset page to 1 when searching */}
+          <input type="hidden" name="page" value="1" />
+
           <button
             type="submit"
             className="cursor-pointer hidden peer-not-placeholder-shown:flex ml-3 p-1 bg-gray-200 dark:bg-(--blue-950) rounded items-center"
@@ -64,6 +81,15 @@ const Home = async ({
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
           </select>
+
+          {/* Preserve search */}
+          {searchParams.q && (
+            <input type="hidden" name="q" value={searchParams.q} />
+          )}
+
+          {/* Reset page to 1 when region changes */}
+          <input type="hidden" name="page" value="1" />
+
           <button
             type="submit"
             className="cursor-pointer hidden peer-has-[option:checked:not([value=''])]:flex p-1 bg-gray-200 dark:bg-(--blue-950) rounded items-center"
@@ -73,7 +99,12 @@ const Home = async ({
         </form>
       </div>
       <section>
-        <CountriesList list={filtered}></CountriesList>
+        <CountriesList list={paginated}></CountriesList>
+        <Pagination
+          page={page}
+          total={filtered.length}
+          itemsPerPage={itemsPerPage}
+        ></Pagination>
       </section>
     </main>
   );
