@@ -4,13 +4,16 @@ import Image from "next/image";
 
 const CountriesList = ({ list }: { list: Country[] }) => {
   return (
-    <ul className="flex flex-col items-center gap-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-18">
+    <ul
+      aria-label="Countries list"
+      className="flex flex-col items-center gap-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-18"
+    >
       {list.map((country: Country) => (
         <li
           key={country.cca3}
           className="w-66 h-84 box-light dark:bg-(--blue-900)"
         >
-          <Link href={`/country/${country.cca3}`} className="w-full">
+          <Link href={`/countries/${country.cca3}`} className="w-full">
             <Image
               src={
                 country.flags.svg || country.flags.png || "/fallback-flag.svg"

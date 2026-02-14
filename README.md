@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+- page rengering
+  - render container
+  - render filter
+  - render search box
+- home page
+  - show 8 countries
+  - move to page 2 (?page=2)
+  - move to page 3
 
-## Getting Started
+- search input
+  - japan
+  - jpn
+  - aaa
+  - a
 
-First, run the development server:
+- filter
+  - show 8 countries
+  - move to page 2 (?region=Asia&page=2)
+  - move to page 3
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- dark mode
+
+## Jest
+
+### Mock `fetch`
+
+The Next.js server components such as `app/page.tsx` and `app/countries/[code]/page.tsx` calls `fetch`:
+
+```tsx
+await fetch("https://restcountries.com/v3.1/all?...");
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+However, Jest run in Node, which does NOT provide `fetch`, resulting in `ReferenceError: fetch is not defined` when it runs a test.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To fix this, I mocked `fetch`, replacing the real function with a fake one that returns fake data.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+About 40 countries data was needed for the tests, so I created a separate `countries.fixture.ts` file in `__tests__/fixtures` folder and import it in the test file. By default Jest trys to find a test in every file inside `__test__` and repots "a failed test" if it can't, so make sure to add `testPathIgnorePatterns: ["/fixtures/"],` to `jest.config.ts` to prevent Jest from looking for a test in any file inside `fixtures`.
 
-## Learn More
+```ts
+// jest.config.ts
+const config: Config = {
+  ...
+  testPathIgnorePatterns: ["/fixtures/"],
+};
+```
 
-To learn more about Next.js, take a look at the following resources:
+```ts
+// test.tsx
+beforeAll(() => {
+  global.fetch = jest.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(mockCountries),
+    }),
+  ) as jest.Mock;
+});
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. `beforeAll(() => { ... })` - This means: “Before any test runs, set up this mock.” It runs once for the entire test file.
+2. `global.fetch = ...` - This replaces the real `fetch` with my own function.
+3. `jest.fn(() => ...)` - It creates a mock function. When `fetch()` is called, this function will be run.
+4. `Promise.resolve({ ... })` - `fetch` normally returns a `Promise<Response>`, so the mock function must also return a `Promise`. This part means: “`fetch()` resolves to an object that looks like a `Response`.” A real `Response object` has a `.json()` method, so it includes one.
+5. `json: () => Promise.resolve([...])` - In my server components:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```tsx
+const response = await fetch(...)
+const countries = await response.json()
+```
 
-## Deploy on Vercel
+So the mock function must behave the same way:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `fetch()` returns an object
+- that object has a `.json()` method
+- `.json()` returns a `Promise`
+- that `Promise` resolves to the array of fake countries
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. `as jest.Mock` - It is a type annotation of a Jest mock function.

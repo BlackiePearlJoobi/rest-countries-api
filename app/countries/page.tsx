@@ -37,7 +37,7 @@ const CountrySearchPage = async ({
   const paginated = partialMatches.slice(start, end);
 
   return (
-    <div className="mx-21 mt-10">
+    <div className="mx-4 mt-10 sm:mx-10">
       <BackButton></BackButton>
       <h1 className="mt-8 text-preset-4-semibold">
         No exact match found for &quot;{query}&ldquo;

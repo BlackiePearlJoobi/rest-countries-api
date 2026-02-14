@@ -12,6 +12,9 @@ const CountryPage = async ({ params }: { params: { code: string } }) => {
   );
   const country: Country = await response.json();
 
+  console.log(
+    `https://restcountries.com/v3.1/alpha/${code}?fields=cca3,flags,name,population,region,subregion,capital,tld,currencies,languages,borders`,
+  );
   console.log(country);
 
   if (!country) {
@@ -103,7 +106,7 @@ const CountryPage = async ({ params }: { params: { code: string } }) => {
               {country.borders?.map((neighbor) => (
                 <li key={neighbor}>
                   <Link
-                    href={`/country/${neighbor}`}
+                    href={`/countries/${neighbor}`}
                     className="min-w-24 h-7 box-light dark:bg-(--blue-900) rounded-xs text-preset-6-light flex items-center justify-center sm:text-preset-5-light"
                   >
                     {neighbor}

@@ -31,8 +31,8 @@ const Home = async ({
     <main className="px-4 pt-6 pb-16.25 sm:px-10 sm:pt-12 sm:pb-14.5 lg:pb-12">
       <div className="mb-8 w-full flex flex-col gap-10 sm:mb-12 sm:flex-row sm:gap-2 lg:justify-between">
         <form
-          action="/country"
-          method="GET"
+          action="/countries" // tells the browser where to send the form data when the user submits it
+          method="GET" // the browser will navigate to /countries and append the form data as query parameters
           className="w-full h-12 px-8 py-3.75 box-light dark:bg-(--blue-900)  text-preset-6-regular flex sm:h-14 sm:flex-1 sm:text-preset-5-regular lg:flex-none lg:w-120"
         >
           <Image
@@ -42,18 +42,17 @@ const Home = async ({
             alt=""
             className="w-[15.56px] h-auto"
           ></Image>
+          <label htmlFor="search" className="sr-only">
+            Search for a country
+          </label>
           <input
+            id="search"
             type="search"
-            name="q" // Next.js  receives it as searchParams.q
+            name="q" // Next.js receives it as searchParams.q
             placeholder="Search for a country..."
             className="peer w-full ml-6"
             defaultValue=""
           ></input>
-
-          {/* Preserve region */}
-          {searchParams.region && (
-            <input type="hidden" name="region" value={searchParams.region} />
-          )}
 
           {/* Reset page to 1 when searching */}
           <input type="hidden" name="page" value="1" />
@@ -66,26 +65,26 @@ const Home = async ({
           </button>
         </form>
         <form
+          // when action is ommited, the form submits to the current page URL
           method="GET"
           className="w-50 h-12 py-3.75 box-light dark:bg-(--blue-900) text-preset-6-regular flex justify-center gap-2 sm:w-55 sm:h-14 sm:text-preset-5-regular"
         >
+          <label htmlFor="region" className="sr-only">
+            Filter by Region
+          </label>
           <select
+            id="region"
             name="region"
             defaultValue=""
             className="peer pr-4 dark:bg-(--blue-900)"
           >
             <option value="">Filter by Region</option>
             <option value="Africa">Africa</option>
-            <option value="Americas">America</option>
+            <option value="Americas">Americas</option>
             <option value="Asia">Asia</option>
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
           </select>
-
-          {/* Preserve search */}
-          {searchParams.q && (
-            <input type="hidden" name="q" value={searchParams.q} />
-          )}
 
           {/* Reset page to 1 when region changes */}
           <input type="hidden" name="page" value="1" />
