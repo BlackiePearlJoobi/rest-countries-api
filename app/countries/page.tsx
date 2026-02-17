@@ -22,7 +22,7 @@ const CountrySearchPage = async ({
   );
 
   if (match) {
-    redirect(`/country/${match.cca3}`);
+    redirect(`/countries/${match.cca3}`);
   }
 
   const partialMatches = countries.filter((c) =>

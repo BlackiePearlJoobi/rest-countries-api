@@ -11,8 +11,8 @@ jest.mock("next/navigation", () => ({
     replace: jest.fn(),
     prefetch: jest.fn(),
   }),
-  usePathname: () => "/", // The tests below are all for app/page.tsx
-  useSearchParams: () => new URLSearchParams(),
+  usePathname: () => "/", // for Pagination
+  useSearchParams: () => new URLSearchParams(), // for Pagination
 }));
 
 // Mock fetch for server components
@@ -28,12 +28,14 @@ describe("Page render", () => {
   it("renders the container", async () => {
     const ui = await Home({ searchParams: {} });
     const { container } = render(ui); // `countainer` is the root DOM node (usually a <div>) appended by default to document.body
+
     expect(container).toBeInTheDocument();
   });
 
   it("shows the filter", async () => {
     const ui = await Home({ searchParams: {} });
     render(ui);
+
     expect(
       screen.getByRole("combobox", { name: /filter by region/i }),
     ).toBeInTheDocument(); // `screen` represents the entire rendered document; `combobox` is the ARIA role of <select> element
@@ -42,6 +44,7 @@ describe("Page render", () => {
   it("shows the search box", async () => {
     const ui = await Home({ searchParams: {} });
     render(ui);
+
     expect(
       screen.getByRole("searchbox", { name: /search for a country/i }),
     ).toBeInTheDocument();
@@ -49,11 +52,12 @@ describe("Page render", () => {
 });
 
 describe("Top page", () => {
-  it("shows the first 8 countries", async () => {
+  it("shows the first eight countries", async () => {
     const ui = await Home({ searchParams: {} });
     render(ui);
     const list = screen.getByRole("list", { name: /countries list/i }); // scoping into the outer <ul>
-    const items = Array.from(list.children); // direct children (<li>s)
+    const items = Array.from(list.children); // the direct child <li>s
+
     expect(items).toHaveLength(8);
   });
 
@@ -61,6 +65,7 @@ describe("Top page", () => {
     const ui = await Home({ searchParams: {} });
     render(ui);
     const nextLink = screen.getByRole("link", { name: /next/i });
+
     expect(nextLink).toHaveAttribute("href", "/?page=2");
   });
 
@@ -68,6 +73,7 @@ describe("Top page", () => {
     const ui = await Home({ searchParams: { page: "2" } });
     render(ui);
     const nextLink = screen.getByRole("link", { name: /next/i });
+
     expect(nextLink).toHaveAttribute("href", "/?page=3");
   });
 });

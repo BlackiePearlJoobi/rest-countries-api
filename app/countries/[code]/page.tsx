@@ -32,7 +32,10 @@ const CountryPage = async ({ params }: { params: { code: string } }) => {
   return (
     <main className="mx-[27.5px] mt-10 mb-13.75 sm:mx-auto sm:max-w-150 xl:mt-20 xl:min-w-315">
       <BackButton></BackButton>
-      <article className="mt-16 flex flex-col items-center gap-12 sm:mt-14 sm:gap-14 xl:mt-20 xl:flex-row xl:gap-30">
+      <article
+        aria-label="Country detail"
+        className="mt-16 flex flex-col items-center gap-12 sm:mt-14 sm:gap-14 xl:mt-20 xl:flex-row xl:gap-30"
+      >
         <Image
           src={country.flags.svg || country.flags.png || "/fallback-flag.svg"}
           width={320}

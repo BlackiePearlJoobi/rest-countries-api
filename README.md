@@ -1,24 +1,4 @@
-- page rengering
-  - render container
-  - render filter
-  - render search box
-- home page
-  - show 8 countries
-  - move to page 2 (?page=2)
-  - move to page 3
-
-- search input
-  - japan
-  - jpn
-  - aaa
-  - a
-
-- filter
-  - show 8 countries
-  - move to page 2 (?region=Asia&page=2)
-  - move to page 3
-
-- dark mode
+- dark mode test
 
 ## Jest
 
