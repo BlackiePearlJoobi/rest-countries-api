@@ -11,7 +11,6 @@ A fully responsive and performant web application for exploring detailed informa
   - [Built with](#built-with)
   - [Project structure](#project-structure)
   - [Build strategy](#build-strategy)
-  - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Acknowledgments](#acknowledgments)
 - [Author](#author)
