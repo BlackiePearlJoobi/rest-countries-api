@@ -41,7 +41,7 @@ describe("Search", () => {
     expect(redirect).toHaveBeenCalledWith("/countries/ESP");
   });
 
-  it("finds no exact match and similar countries", async () => {
+  it("finds no exact match or similar countries", async () => {
     const ui = await CountrySearchPage({ searchParams: { q: "abc" } });
     render(ui);
 
@@ -49,7 +49,7 @@ describe("Search", () => {
     expect(screen.getByText(/no similar countries found/i)).toBeInTheDocument();
   });
 
-  it("finds no exact match but shows similar countries", async () => {
+  it("finds no exact match but similar countries", async () => {
     const ui = await CountrySearchPage({ searchParams: { q: "a" } });
     render(ui);
 
