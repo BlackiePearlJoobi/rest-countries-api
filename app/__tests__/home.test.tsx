@@ -52,13 +52,13 @@ describe("Page render", () => {
 });
 
 describe("Top page", () => {
-  it("shows the first eight countries", async () => {
+  it("shows the first ten countries", async () => {
     const ui = await Home({ searchParams: {} });
     render(ui);
     const list = screen.getByRole("list", { name: /countries list/i }); // scoping into the outer <ul>
     const items = Array.from(list.children); // the direct child <li>s
 
-    expect(items).toHaveLength(8);
+    expect(items).toHaveLength(10);
   });
 
   it("navigates to page 2 when the user clicks next", async () => {

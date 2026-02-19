@@ -22,7 +22,7 @@ const Home = async ({
 
   // Pagination
   const page = Number((await searchParams).page) || 1;
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
   const start = (page - 1) * itemsPerPage;
   const end = start + itemsPerPage;
   const paginated = filtered.slice(start, end);

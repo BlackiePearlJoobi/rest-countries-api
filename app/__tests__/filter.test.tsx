@@ -25,13 +25,13 @@ beforeAll(() => {
 });
 
 describe("Filter", () => {
-  it("shows the first eight filtered countries", async () => {
+  it("shows the first ten filtered countries", async () => {
     const ui = await Home({ searchParams: { region: "Europe" } });
     render(ui);
     const list = screen.getByRole("list", { name: /countries list/i }); // the outer <ul>
     const items = Array.from(list.children); // the direct child <li>s
 
-    expect(items).toHaveLength(8);
+    expect(items).toHaveLength(10);
 
     items.forEach((item) => {
       expect(item.textContent?.toLowerCase()).toContain("europe");
