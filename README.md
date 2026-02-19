@@ -38,7 +38,7 @@ The goal of this project was to build a modern, performant countries explorer ap
 ### Links
 
 - Solution URL: [GitHub repo](https://github.com/BlackiePearlJoobi/rest-countries-api)
-- Live Site URL: [Vercel]()
+- Live Site URL: [Vercel](https://rest-countries-api-sigma-bice.vercel.app/)
 
 ## My process
 
