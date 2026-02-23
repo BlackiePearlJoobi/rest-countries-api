@@ -6,6 +6,7 @@ A fully responsive and performant web application for exploring detailed informa
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
+  - [Screenshots](#screenshots)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
@@ -34,6 +35,11 @@ The goal of this project was to build a modern, performant countries explorer ap
 - Supporting **dark mode** with a persistent theme toggle
 
 - Writing **unit tests** with Jest and React Testing Library to ensure component reliability
+
+### Screenshots
+
+![Screenshot - desktop](assets/images/screenshot_desktop.jpg)
+![Screenshot - mobile](assets/images/screenshot-mobile.jpg)
 
 ### Links
 
