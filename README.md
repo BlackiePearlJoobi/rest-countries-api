@@ -38,8 +38,8 @@ The goal of this project was to build a modern, performant countries explorer ap
 
 ### Screenshots
 
-![Screenshot - desktop](assets/images/screenshot_desktop.jpg)
-![Screenshot - mobile](assets/images/screenshot-mobile.jpg)
+![Screenshot - desktop](public/assets/images/screenshot_desktop.jpg)
+![Screenshot - mobile](public/assets/images/screenshot-mobile.jpg)
 
 ### Links
 
