@@ -88,7 +88,8 @@ This project was developed with a focus on performance, accessibility, and maint
 
 1. Dynamic Routing with App Router and REST Countries API Integration
 2. Pagination for Large Data Sets
-3. Unit & Integration Testing
+3. Dark Mode on the Server Side
+4. Unit & Integration Testing
 
 #### 1. Dynamic Routing with App Router and REST Countries API Integration
 
@@ -168,7 +169,88 @@ export default function Pagination({
 
 This pattern keeps pagination logic simple, predictable, and fully compatible with server‑side rendering. It also ensures that **pagination state is reflected in the URL**, making pages shareable and bookmark‑friendly.
 
-#### 3. Unit & Integration Testing
+#### 3. Dark Mode on the Server Side
+
+This project uses Tailwind CSS v4's `dark` variant to enable dark mode without pushing the entire app into client‑side rendering. Unlike a Context‑based theme solution, this approach keeps the app fully server‑rendered, with only the toggle switch implemented as a Client Component.
+
+```css
+// `globals.css`
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+This custom variant overrides Tailwind’s default OS‑based dark mode (​​​`​prefers-color-scheme`​ ​ media query) and switches to a class‑based strategy. Any element becomes “dark‑mode aware” when a `.dark` class exists somewhere above it in the DOM.
+
+The theme is restored **before hydration** using a minimal inline `<script>`:
+
+```tsx
+// `app/layout.tsx`
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: ` if (localStorage.theme === 'dark') { document.documentElement.classList.add('dark'); } `,
+          }}
+        />
+      </head>
+      <body className="antialiased bg-(--gray-50) dark:bg-(--blue-950) text-(--gray-950) dark:text-(--white)">
+        <div className="w-full...">
+          <Header></Header>
+          {children}
+        </div>
+      </body>
+    </html>
+  );
+}
+```
+
+The toggle switch updates both the DOM and `localStorage`:
+
+```tsx
+// `Switch.tsx`
+"use client";
+
+const Switch = () => {
+  const isDarkInitial = document.documentElement.classList.contains("dark");
+
+  const [isDark, setIsDark] = useState(isDarkInitial); // used only for this Switch component
+
+  const toggleDarkMode = () => {
+    const html = document.documentElement;
+    const nowDark = html.classList.toggle("dark"); // If .dark is present → remove it → returns false; If .dark is absent → add it → returns true; So nowDark is always the new theme state.
+
+    setIsDark(nowDark);
+    localStorage.theme = nowDark ? "dark" : "light";
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={toggleDarkMode}
+      className="flex..."
+    >
+      <Image src={...}></Image>
+      <p>{isDark ? "Light Mode" : "Dark Mode"}</p>
+    </button>
+  );
+};
+```
+
+Render flow:
+
+1. Server renders the entire document, including `<html>` and `<body>`
+2. The browser receives HTML and immediately executes the inline `<script>`
+3. The script applies `.dark` before hydration, preventing flashes of incorrect theme
+4. React hydrates only the `Switch` component (no hydration of the whole tree)
+
+This pattern aligns with Vercel’s recommended RSC‑first architecture and keeps dark mode fully compatible with server rendering.
+
+#### 4. Unit & Integration Testing
 
 Testing focused on ensuring that page rendering, search behavior, region filtering, and pagination all work reliably across server and client components. Because Next.js server components rely on `fetch`, additional setup was required to make tests run correctly in Jest.
 
