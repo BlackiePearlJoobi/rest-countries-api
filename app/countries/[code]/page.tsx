@@ -47,8 +47,8 @@ const CountryPage = async ({ params }: { params: { code: string } }) => {
           <h2 className="mb-4 text-preset-2 sm:mb-6 sm:text-preset-1">
             {country.name.common}
           </h2>
-          <div className="flex flex-col gap-8 sm:w-full sm:flex-row sm:justify-between">
-            <ul className="text-preset-5-light leading-4 flex flex-col gap-2 sm:text-preset-4-light">
+          <div className="flex flex-col gap-8 sm:w-full sm:flex-row">
+            <ul className="text-preset-5-light leading-4 flex flex-col gap-2 sm:text-preset-4-light sm:flex-1">
               <li>
                 <span className="text-preset-5-semibold sm:text-preset-4-semibold">
                   Native Name:{" "}
@@ -80,7 +80,7 @@ const CountryPage = async ({ params }: { params: { code: string } }) => {
                 {country.capital?.join(", ") ?? "N/A"}
               </li>
             </ul>
-            <ul className="text-preset-5-light leading-4 flex flex-col gap-2 sm:text-preset-4-light">
+            <ul className="text-preset-5-light leading-4 flex flex-col gap-2 sm:text-preset-4-light sm:flex-1">
               <li>
                 <span className="text-preset-5-semibold sm:text-preset-4-semibold">
                   Top Level Domain:{" "}
