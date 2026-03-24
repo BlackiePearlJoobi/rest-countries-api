@@ -57,8 +57,8 @@ describe("Filter", () => {
   it("navigates from page 2 to page 1 while keeping filtered", async () => {
     const ui = await Home({ searchParams: { page: "2", region: "Europe" } });
     render(ui);
-    const nextLink = screen.getByRole("link", { name: /</i });
+    const previousLink = screen.getByRole("link", { name: /</i });
 
-    expect(nextLink).toHaveAttribute("href", "/?region=Europe&page=1");
+    expect(previousLink).toHaveAttribute("href", "/?region=Europe&page=1");
   });
 });

@@ -80,8 +80,8 @@ describe("Top page", () => {
   it("navigates from page 2 to page 1", async () => {
     const ui = await Home({ searchParams: { page: "2" } });
     render(ui);
-    const nextLink = screen.getByRole("link", { name: /</i });
+    const previousLink = screen.getByRole("link", { name: /</i });
 
-    expect(nextLink).toHaveAttribute("href", "/?page=1");
+    expect(previousLink).toHaveAttribute("href", "/?page=1");
   });
 });
