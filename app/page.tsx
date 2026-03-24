@@ -100,7 +100,7 @@ const Home = async ({
       <section>
         <CountriesList list={paginated}></CountriesList>
         <Pagination
-          page={page}
+          currentPage={page}
           total={filtered.length}
           itemsPerPage={itemsPerPage}
         ></Pagination>
