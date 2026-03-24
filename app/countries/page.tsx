@@ -49,7 +49,7 @@ const CountrySearchPage = async ({
           </p>
           <CountriesList list={paginated}></CountriesList>{" "}
           <Pagination
-            page={page}
+            currentPage={page}
             total={partialMatches.length}
             itemsPerPage={itemsPerPage}
           ></Pagination>
