@@ -27,7 +27,10 @@ export default function Pagination({
   };
 
   return (
-    <nav className="flex flex-wrap gap-4 justify-center mt-10">
+    <nav
+      aria-label="Pagination"
+      className="flex flex-wrap gap-4 justify-center mt-10"
+    >
       {currentPage > 1 && (
         <PaginationArrow
           href={createPageLink(currentPage - 1)}
@@ -35,7 +38,7 @@ export default function Pagination({
         ></PaginationArrow>
       )}
 
-      <div className="flex -space-x-px">
+      <ul className="flex -space-x-px list-none">
         {allPages.map((page, index) => {
           let position: "first" | "last" | "single" | "middle" | undefined;
 
@@ -54,7 +57,7 @@ export default function Pagination({
             />
           );
         })}
-      </div>
+      </ul>
 
       {currentPage < totalPages && (
         <PaginationArrow
@@ -104,9 +107,13 @@ const PaginationArrow = ({
   return (
     <Link
       href={href}
+      aria-label={direction === "left" ? "Previous page" : "Next page"}
       className="h-10 w-10 flex items-center justify-center rounded-md cursor-pointer border border-gray-300 dark:border-gray-600 hover:bg-gray-300 dark:hover:bg-gray-600"
     >
-      {direction === "left" ? "<" : ">"}
+      <span
+        aria-hidden="true"
+        className={direction === "left" ? "arrow-left" : "arrow-right"}
+      ></span>
     </Link>
   );
 };
@@ -134,11 +141,26 @@ const PaginationNumber = ({
     },
   );
 
-  return isActive || position === "middle" ? (
-    <div className={className}>{page}</div>
-  ) : (
-    <Link href={href} className={className}>
-      {page}
-    </Link>
+  return (
+    <li>
+      {isActive ? (
+        <div aria-current="page" className={className}>
+          {page}
+        </div>
+      ) : position === "middle" ? (
+        // Prevent screen readers from announcing “dot dot dot”
+        <div aria-hidden="true" className={className}>
+          {page}
+        </div>
+      ) : (
+        <Link
+          href={href}
+          aria-label={`Go to page ${page}`}
+          className={className}
+        >
+          {page}
+        </Link>
+      )}
+    </li>
   );
 };

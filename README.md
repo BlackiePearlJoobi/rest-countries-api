@@ -146,7 +146,7 @@ export default function Pagination({
   };
 
   return (
-    <nav className="flex...">
+    <nav aria-label="Pagination" className="flex...">
       {currentPage > 1 && (
         <PaginationArrow
           href={createPageLink(currentPage - 1)}
@@ -154,7 +154,7 @@ export default function Pagination({
         ></PaginationArrow>
       )}
 
-      <div className="flex...">
+      <ul className="flex...">
         {allPages.map((page, index) => {
           let position: "first" | "last" | "single" | "middle" | undefined;
 
@@ -173,7 +173,7 @@ export default function Pagination({
             />
           );
         })}
-      </div>
+      </ul>
 
       {currentPage < totalPages && (
         <PaginationArrow
@@ -218,7 +218,7 @@ const generatePagination = (currentPage: number, totalPages: number) => {
 };
 ```
 
-Each button is styled based on its position and whether it matches the current page:
+Each pagination item is styled according to its position and active state, and ARIA attributes such as `aria-label`, `aria-current` or `aria-hidden` are applied where appropriate:
 
 ```tsx
 const PaginationNumber = ({
@@ -244,12 +244,27 @@ const PaginationNumber = ({
     },
   );
 
-  return isActive || position === "middle" ? (
-    <div className={className}>{page}</div>
-  ) : (
-    <Link href={href} className={className}>
-      {page}
-    </Link>
+  return (
+    <li>
+      {isActive ? (
+        <div aria-current="page" className={className}>
+          {page}
+        </div>
+      ) : position === "middle" ? (
+        // Prevent screen readers from announcing “dot dot dot”
+        <div aria-hidden="true" className={className}>
+          {page}
+        </div>
+      ) : (
+        <Link
+          href={href}
+          aria-label={`Go to page ${page}`}
+          className={className}
+        >
+          {page}
+        </Link>
+      )}
+    </li>
   );
 };
 ```

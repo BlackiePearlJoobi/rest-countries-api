@@ -125,3 +125,30 @@ body {
 html.dark .arrow-icon {
   background-image: url("/assets/images/arrow-dark.svg");
 }
+
+/* PaginationArrow */
+.arrow-left {
+  width: 10px;
+  height: 10px;
+  background-image: url("/assets/images/arrow-left-black.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+html.dark .arrow-left {
+  background-image: url("/assets/images/arrow-left-white.svg");
+}
+
+.arrow-right {
+  width: 10px;
+  height: 10px;
+  background-image: url("/assets/images/arrow-right-black.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+html.dark .arrow-right {
+  background-image: url("/assets/images/arrow-right-white.svg");
+}
