@@ -64,7 +64,7 @@ describe("Top page", () => {
   it("navigates to page 2 when the user clicks next", async () => {
     const ui = await Home({ searchParams: {} });
     render(ui);
-    const nextLink = screen.getByRole("link", { name: />/i });
+    const nextLink = screen.getByRole("link", { name: /next page/i });
 
     expect(nextLink).toHaveAttribute("href", "/?page=2");
   });
@@ -72,7 +72,7 @@ describe("Top page", () => {
   it("navigates from page 2 to page 3", async () => {
     const ui = await Home({ searchParams: { page: "2" } });
     render(ui);
-    const nextLink = screen.getByRole("link", { name: />/i });
+    const nextLink = screen.getByRole("link", { name: /next page/i });
 
     expect(nextLink).toHaveAttribute("href", "/?page=3");
   });
@@ -80,7 +80,7 @@ describe("Top page", () => {
   it("navigates from page 2 to page 1", async () => {
     const ui = await Home({ searchParams: { page: "2" } });
     render(ui);
-    const previousLink = screen.getByRole("link", { name: /</i });
+    const previousLink = screen.getByRole("link", { name: /previous page/i });
 
     expect(previousLink).toHaveAttribute("href", "/?page=1");
   });

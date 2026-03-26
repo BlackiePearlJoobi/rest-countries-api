@@ -41,7 +41,7 @@ describe("Filter", () => {
   it("navigates to the second filterd page when the user clicks next", async () => {
     const ui = await Home({ searchParams: { region: "Europe" } });
     render(ui);
-    const nextLink = screen.getByRole("link", { name: />/i });
+    const nextLink = screen.getByRole("link", { name: /next page/i });
 
     expect(nextLink).toHaveAttribute("href", "/?region=Europe&page=2");
   });
@@ -49,7 +49,7 @@ describe("Filter", () => {
   it("navigates from page 2 to page 3 while keeping filtered", async () => {
     const ui = await Home({ searchParams: { page: "2", region: "Europe" } });
     render(ui);
-    const nextLink = screen.getByRole("link", { name: />/i });
+    const nextLink = screen.getByRole("link", { name: /next page/i });
 
     expect(nextLink).toHaveAttribute("href", "/?region=Europe&page=3");
   });
@@ -57,7 +57,7 @@ describe("Filter", () => {
   it("navigates from page 2 to page 1 while keeping filtered", async () => {
     const ui = await Home({ searchParams: { page: "2", region: "Europe" } });
     render(ui);
-    const previousLink = screen.getByRole("link", { name: /</i });
+    const previousLink = screen.getByRole("link", { name: /previous page/i });
 
     expect(previousLink).toHaveAttribute("href", "/?region=Europe&page=1");
   });
