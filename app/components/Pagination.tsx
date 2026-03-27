@@ -112,7 +112,7 @@ const PaginationArrow = ({
     >
       <span
         aria-hidden="true"
-        className={direction === "left" ? "arrow-left" : "arrow-right"}
+        className={`arrow-svg ${direction === "left" ? "arrow-left" : "arrow-right"}`}
       ></span>
     </Link>
   );

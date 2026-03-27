@@ -112,28 +112,29 @@ body {
   place-items: center;
 }
 
-/* BackButton */
-.arrow-icon {
-  width: 17px;
-  height: 17px;
-  background-image: url("/assets/images/arrow-light.svg");
+/* Arrow SVG general settings*/
+.arrow-svg {
   background-size: contain;
   background-repeat: no-repeat;
   display: inline-block;
 }
 
-html.dark .arrow-icon {
+/* BackButton */
+.arrow-back {
+  width: 17px;
+  height: 17px;
+  background-image: url("/assets/images/arrow-light.svg");
+}
+
+html.dark .arrow-back {
   background-image: url("/assets/images/arrow-dark.svg");
 }
 
-/* PaginationArrow */
+/* Pagination */
 .arrow-left {
   width: 10px;
   height: 10px;
   background-image: url("/assets/images/arrow-left-black.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline-block;
 }
 
 html.dark .arrow-left {
@@ -144,9 +145,6 @@ html.dark .arrow-left {
   width: 10px;
   height: 10px;
   background-image: url("/assets/images/arrow-right-black.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline-block;
 }
 
 html.dark .arrow-right {
