@@ -8,12 +8,16 @@ const CountriesList = ({ list }: { list: Country[] }) => {
       aria-label="Countries list"
       className="flex flex-col items-center gap-10 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-18"
     >
-      {list.map((country: Country) => (
+      {list.map((country: Country, i) => (
         <li
           key={country.cca3}
           className="w-66 h-84 box-light dark:bg-(--blue-900)"
         >
-          <Link href={`/countries/${country.cca3}`} className="w-full">
+          <Link
+            href={`/countries/${country.cca3}`}
+            data-focus-target={i === 0 ? true : undefined}
+            className="w-full"
+          >
             <Image
               src={
                 country.flags.svg || country.flags.png || "/fallback-flag.svg"

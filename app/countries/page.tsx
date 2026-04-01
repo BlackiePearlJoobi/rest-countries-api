@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import BackButton from "../components/BackButton";
 import CountriesList from "../components/CountriesList";
 import Pagination from "../components/Pagination";
+import FocusOnRender from "../components/FocusOnRender";
 
 const CountrySearchPage = async ({
   searchParams,
@@ -47,7 +48,9 @@ const CountrySearchPage = async ({
           <p className="text-preset-4-light mb-6">
             Are you looking for the following countries?
           </p>
-          <CountriesList list={paginated}></CountriesList>{" "}
+          <FocusOnRender currentPage={page}>
+            <CountriesList list={paginated}></CountriesList>
+          </FocusOnRender>
           <Pagination
             currentPage={page}
             total={partialMatches.length}
