@@ -15,7 +15,7 @@ export default function Pagination({
   itemsPerPage: number;
 }) {
   const totalPages = Math.ceil(total / itemsPerPage);
-  const pathname = usePathname(); // returns the current route path without query params (e.g., '/', '/country', etc.)
+  const pathname = usePathname(); // returns the current route path without query params (e.g., '/', '/countries', etc.)
   const searchParams = useSearchParams(); // returns an immutable ReadonlyURLSearchParams object that would look like: {page: '1', region: 'Americas'}
   const allPages = generatePagination(currentPage, totalPages); //array
 

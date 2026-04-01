@@ -12,11 +12,6 @@ const CountryPage = async ({ params }: { params: { code: string } }) => {
   );
   const country: Country = await response.json();
 
-  console.log(
-    `https://restcountries.com/v3.1/alpha/${code}?fields=cca3,flags,name,population,region,subregion,capital,tld,currencies,languages,borders`,
-  );
-  console.log(country);
-
   if (!country) {
     notFound();
   }

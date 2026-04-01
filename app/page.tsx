@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Country } from "./types/definitions";
 import CountriesList from "./components/CountriesList";
 import Pagination from "./components/Pagination";
+import FocusOnRender from "./components/FocusOnRender";
 
 const Home = async ({
   searchParams,
@@ -98,7 +99,9 @@ const Home = async ({
         </form>
       </div>
       <section>
-        <CountriesList list={paginated}></CountriesList>
+        <FocusOnRender currentPage={page}>
+          <CountriesList list={paginated}></CountriesList>
+        </FocusOnRender>
         <Pagination
           currentPage={page}
           total={filtered.length}
