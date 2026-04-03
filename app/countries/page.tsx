@@ -8,7 +8,7 @@ import FocusOnRender from "../components/FocusOnRender";
 const CountrySearchPage = async ({
   searchParams,
 }: {
-  searchParams: { q?: string; page?: string };
+  searchParams: Promise<{ q?: string; page?: string }>;
 }) => {
   const response = await fetch(
     "https://restcountries.com/v3.1/all?fields=cca3,flags,name,population,region,capital",
