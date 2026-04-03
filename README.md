@@ -98,7 +98,11 @@ The directory structure `app/countries/[code]` enables intuitive, scalable routi
 For example, the dynamic route `app/countries/[code]/page.tsx` fetches data directly from the REST Countries API based on the code parameter:
 
 ```tsx
-const CountryPage = async ({ params }: { params: { code: string } }) => {
+const CountryPage = async ({
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}) => {
   const code = (await params).code.toUpperCase();
 
   const response = await fetch(

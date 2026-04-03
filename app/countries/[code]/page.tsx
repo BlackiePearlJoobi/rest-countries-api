@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import BackButton from "@/app/components/BackButton";
 import { Country } from "@/app/types/definitions";
 
-const CountryPage = async ({ params }: { params: { code: string } }) => {
+const CountryPage = async ({
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}) => {
   const code = (await params).code.toUpperCase();
 
   const response = await fetch(
