@@ -3,6 +3,7 @@ import { Country } from "./types/definitions";
 import CountriesList from "./components/CountriesList";
 import Pagination from "./components/Pagination";
 import FocusOnRender from "./components/FocusOnRender";
+import AutoSubmitSelect from "./components/AutoSubmitSelect";
 
 const Home = async ({
   searchParams,
@@ -67,35 +68,28 @@ const Home = async ({
         </form>
         <form
           // when action is ommited, the form submits to the current page URL
-          method="GET"
-          className="w-50 h-12 py-3.75 box-light dark:bg-(--blue-900) text-preset-6-regular flex justify-center gap-2 sm:w-55 sm:h-14 sm:text-preset-5-regular"
+          method="GET" // the browser will append the form data as query parameters and reload the page with a new URL
+          className="w-40 h-12 py-3.75 box-light dark:bg-(--blue-900) text-preset-6-regular flex justify-center gap-2 sm:w-45 sm:h-14 sm:text-preset-5-regular"
         >
           <label htmlFor="region" className="sr-only">
             Filter by Region
           </label>
-          <select
+          <AutoSubmitSelect
             id="region"
-            name="region"
-            defaultValue=""
-            className="peer pr-4 dark:bg-(--blue-900)"
+            name="region" // Next.js receives it as searchParams.region
+            value={region}
+            className="pr-4 dark:bg-(--blue-900)"
           >
-            <option value="">Filter by Region</option>
+            <option value="">All Regions</option>
             <option value="Africa">Africa</option>
             <option value="Americas">Americas</option>
             <option value="Asia">Asia</option>
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
-          </select>
+          </AutoSubmitSelect>
 
           {/* Reset page to 1 when region changes */}
           <input type="hidden" name="page" value="1" />
-
-          <button
-            type="submit"
-            className="cursor-pointer hidden peer-has-[option:checked:not([value=''])]:flex p-1 bg-gray-200 dark:bg-(--blue-950) rounded items-center"
-          >
-            Apply
-          </button>
         </form>
       </div>
       <section>
