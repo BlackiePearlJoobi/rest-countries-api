@@ -413,8 +413,8 @@ const countries = await response.json()
 
 So the mock function must behave the same way:
 
-- `fetch()` returns an object
-- that object has a `.json()` method
+- `fetch()` returns a `Promise`, which resolves to a `Response` object
+- that `Response` object has a `.json()` method
 - `.json()` returns a `Promise`
 - that `Promise` resolves to the array of fake countries
 
